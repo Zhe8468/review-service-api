@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package api.review.v1;
+import "errors/errors.proto";
+
+option go_package = "review-service/api/review/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.review.v1";
+
+enum ErrorReason {
+  // 设置缺省错误码
+  option (errors.default_code) = 500;
+
+  // 已有的错误码
+  UNLOGIN = 0 [(errors.code) = 401]; // 未登录
+  DB_FAILED = 1 [(errors.code) = 500]; // 数据库操作失败
+  ID_GENERATE_FAILED = 2 [(errors.code) = 500]; // 雪花算法ID生成失败（如节点ID冲突、时间回拨等）
+  ORDER_REVIEWED = 100 [(errors.code) = 400]; // 订单已评价
+  REVIEW_NOT_FOUND = 101 [(errors.code) = 404]; // 评价不存在（查询/修改不存在的评价时）
+  INVALID_PARAM = 102 [(errors.code) = 400]; // 参数无效（如评分超出1-5范围、内容为空等）
+  REVIEW_ALREADY_AUDITED = 103 [(errors.code) = 400]; // 评价已被审核（重复提交审核、审核后再次尝试审核时）
+  NO_REVIEW_PERMISSION = 300 [(errors.code) = 403]; // 无评价权限（如非订单所有者尝试评价）
+}
