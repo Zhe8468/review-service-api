@@ -181,3 +181,7 @@ message AuditAppealRequest {
 message AuditAppealReply {
   int64 appealID = 1;
 }
+
+message test{
+  
+}
