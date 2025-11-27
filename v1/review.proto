@@ -38,6 +38,7 @@ service Review {
       get: "/v1/reviews",
     };
   };
+  rpc ListReviewByStoreID (ListReviewByStoreIDRequest) returns (ListReviewByStoreIDReply){};
   // B端
   rpc ReplyReview (ReplyReviewRequest) returns (ReplyReviewReply){
     option (google.api.http) = {
@@ -137,7 +138,14 @@ message ListReviewRequest {}
 message ListReviewReply {
   repeated ReviewInfo reviews = 1;
 }
-
+message ListReviewByStoreIDRequest{
+  int64 storeID = 1 [(validate.rules).int64 = {gt: 0}];
+  int32 page = 2 [(validate.rules).int32 = {gt: 0}];
+  int32 size = 3 [(validate.rules).int32 = {gt: 0}];
+}
+message ListReviewByStoreIDReply{
+  repeated ReviewInfo list = 1;
+}
 // 商家端
 message ReplyReviewRequest {
   int64 reviewID = 1 [(validate.rules).int64 = {gt: 0}];
@@ -162,7 +170,7 @@ message AppealReviewReply {
 }
 // 运营端
 message AuditReviewRequest {
-  int64 reviewID = 1 [(validate.rules).int64 = {gt: 0}];;
+  int64 reviewID = 1 [(validate.rules).int64 = {gt: 0}];
   int64 status = 2 [(validate.rules).int64 = {in: [20, 30]}];
   string opRemarks = 3;
   string opUser = 4;
@@ -172,8 +180,8 @@ message AuditReviewReply {
 }
 
 message AuditAppealRequest {
-  int64 appealID = 1 [(validate.rules).int64 = {gt: 0}];;
-  int64 reviewID = 2 [(validate.rules).int64 = {gt: 0}];;
+  int64 appealID = 1 [(validate.rules).int64 = {gt: 0}];
+  int64 reviewID = 2 [(validate.rules).int64 = {gt: 0}];
   int64 status = 3 [(validate.rules).int64 = {in: [20, 30]}];
   string opRemarks = 5;
   string opUser = 6;
