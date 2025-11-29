@@ -1038,6 +1038,8 @@ func (m *GetReviewReply) validate(all bool) error {
 
 	// no validation rules for StoreID
 
+	// no validation rules for Status
+
 	if len(errors) > 0 {
 		return GetReviewReplyMultiError(errors)
 	}
@@ -1237,6 +1239,8 @@ func (m *ReviewInfo) validate(all bool) error {
 	// no validation rules for Anonymous
 
 	// no validation rules for StoreID
+
+	// no validation rules for Status
 
 	if len(errors) > 0 {
 		return ReviewInfoMultiError(errors)

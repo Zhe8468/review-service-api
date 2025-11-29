@@ -8,7 +8,6 @@ package v1
 
 import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -473,6 +472,7 @@ type GetReviewReply struct {
 	VideoInfo     string                 `protobuf:"bytes,9,opt,name=videoInfo,proto3" json:"videoInfo,omitempty"`
 	Anonymous     bool                   `protobuf:"varint,10,opt,name=anonymous,proto3" json:"anonymous,omitempty"`
 	StoreID       int64                  `protobuf:"varint,11,opt,name=storeID,proto3" json:"storeID,omitempty"`
+	Status        int64                  `protobuf:"varint,12,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -584,6 +584,13 @@ func (x *GetReviewReply) GetStoreID() int64 {
 	return 0
 }
 
+func (x *GetReviewReply) GetStatus() int64 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
 type ReviewInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ReviewID      int64                  `protobuf:"varint,1,opt,name=reviewID,proto3" json:"reviewID,omitempty"`
@@ -597,6 +604,7 @@ type ReviewInfo struct {
 	VideoInfo     string                 `protobuf:"bytes,9,opt,name=videoInfo,proto3" json:"videoInfo,omitempty"`
 	Anonymous     bool                   `protobuf:"varint,10,opt,name=anonymous,proto3" json:"anonymous,omitempty"`
 	StoreID       int64                  `protobuf:"varint,11,opt,name=storeID,proto3" json:"storeID,omitempty"`
+	Status        int64                  `protobuf:"varint,12,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -704,6 +712,13 @@ func (x *ReviewInfo) GetAnonymous() bool {
 func (x *ReviewInfo) GetStoreID() int64 {
 	if x != nil {
 		return x.StoreID
+	}
+	return 0
+}
+
+func (x *ReviewInfo) GetStatus() int64 {
+	if x != nil {
+		return x.Status
 	}
 	return 0
 }
@@ -1482,7 +1497,7 @@ var File_review_v1_review_proto protoreflect.FileDescriptor
 
 const file_review_v1_review_proto_rawDesc = "" +
 	"\n" +
-	"\x16review/v1/review.proto\x12\rapi.review.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\"\x80\x03\n" +
+	"\x16review/v1/review.proto\x12\rapi.review.v1\x1a\x17validate/validate.proto\"\x80\x03\n" +
 	"\x13CreateReviewRequest\x12\x1f\n" +
 	"\x06userID\x18\x01 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\x06userID\x12!\n" +
 	"\aorderID\x18\x02 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\aorderID\x12%\n" +
@@ -1521,7 +1536,7 @@ const file_review_v1_review_proto_rawDesc = "" +
 	"\x11DeleteReviewReply\x12\x1a\n" +
 	"\breviewID\x18\x01 \x01(\x03R\breviewID\".\n" +
 	"\x10GetReviewRequest\x12\x1a\n" +
-	"\breviewID\x18\x01 \x01(\x03R\breviewID\"\x97\x03\n" +
+	"\breviewID\x18\x01 \x01(\x03R\breviewID\"\xaf\x03\n" +
 	"\x0eGetReviewReply\x12\x1a\n" +
 	"\breviewID\x18\x01 \x01(\x03R\breviewID\x12\x1f\n" +
 	"\x06userID\x18\x02 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\x06userID\x12!\n" +
@@ -1538,7 +1553,8 @@ const file_review_v1_review_proto_rawDesc = "" +
 	"\tvideoInfo\x18\t \x01(\tR\tvideoInfo\x12\x1c\n" +
 	"\tanonymous\x18\n" +
 	" \x01(\bR\tanonymous\x12\x18\n" +
-	"\astoreID\x18\v \x01(\x03R\astoreID\"\x93\x03\n" +
+	"\astoreID\x18\v \x01(\x03R\astoreID\x12\x16\n" +
+	"\x06status\x18\f \x01(\x03R\x06status\"\xab\x03\n" +
 	"\n" +
 	"ReviewInfo\x12\x1a\n" +
 	"\breviewID\x18\x01 \x01(\x03R\breviewID\x12\x1f\n" +
@@ -1556,7 +1572,8 @@ const file_review_v1_review_proto_rawDesc = "" +
 	"\tvideoInfo\x18\t \x01(\tR\tvideoInfo\x12\x1c\n" +
 	"\tanonymous\x18\n" +
 	" \x01(\bR\tanonymous\x12\x18\n" +
-	"\astoreID\x18\v \x01(\x03R\astoreID\"\x13\n" +
+	"\astoreID\x18\v \x01(\x03R\astoreID\x12\x16\n" +
+	"\x06status\x18\f \x01(\x03R\x06status\"\x13\n" +
 	"\x11ListReviewRequest\"F\n" +
 	"\x0fListReviewReply\x123\n" +
 	"\areviews\x18\x01 \x03(\v2\x19.api.review.v1.ReviewInfoR\areviews\"\xba\x01\n" +
@@ -1606,20 +1623,18 @@ const file_review_v1_review_proto_rawDesc = "" +
 	"\x04page\x18\x02 \x01(\x05B\a\xfaB\x04\x1a\x02 \x00R\x04page\x12\x1b\n" +
 	"\x04size\x18\x03 \x01(\x05B\a\xfaB\x04\x1a\x02 \x00R\x04size\"H\n" +
 	"\x17ListReviewByUserIDReply\x12-\n" +
-	"\x04list\x18\x01 \x03(\v2\x19.api.review.v1.ReviewInfoR\x04list2\xd4\t\n" +
-	"\x06Review\x12k\n" +
-	"\fCreateReview\x12\".api.review.v1.CreateReviewRequest\x1a .api.review.v1.CreateReviewReply\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
-	"/v1/review\x12k\n" +
-	"\fUpdateReview\x12\".api.review.v1.UpdateReviewRequest\x1a .api.review.v1.UpdateReviewReply\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*2\n" +
-	"/v1/review\x12s\n" +
-	"\fDeleteReview\x12\".api.review.v1.DeleteReviewRequest\x1a .api.review.v1.DeleteReviewReply\"\x1d\x82\xd3\xe4\x93\x02\x17*\x15/v1/review/{reviewID}\x12j\n" +
-	"\tGetReview\x12\x1f.api.review.v1.GetReviewRequest\x1a\x1d.api.review.v1.GetReviewReply\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/review/{reviewID}\x12c\n" +
+	"\x04list\x18\x01 \x03(\v2\x19.api.review.v1.ReviewInfoR\x04list2\xdf\a\n" +
+	"\x06Review\x12V\n" +
+	"\fCreateReview\x12\".api.review.v1.CreateReviewRequest\x1a .api.review.v1.CreateReviewReply\"\x00\x12V\n" +
+	"\fUpdateReview\x12\".api.review.v1.UpdateReviewRequest\x1a .api.review.v1.UpdateReviewReply\"\x00\x12V\n" +
+	"\fDeleteReview\x12\".api.review.v1.DeleteReviewRequest\x1a .api.review.v1.DeleteReviewReply\"\x00\x12M\n" +
+	"\tGetReview\x12\x1f.api.review.v1.GetReviewRequest\x1a\x1d.api.review.v1.GetReviewReply\"\x00\x12P\n" +
 	"\n" +
-	"ListReview\x12 .api.review.v1.ListReviewRequest\x1a\x1e.api.review.v1.ListReviewReply\"\x13\x82\xd3\xe4\x93\x02\r\x12\v/v1/reviews\x12n\n" +
-	"\vReplyReview\x12!.api.review.v1.ReplyReviewRequest\x1a\x1f.api.review.v1.ReplyReviewReply\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/review/reply\x12r\n" +
-	"\fAppealReview\x12\".api.review.v1.AppealReviewRequest\x1a .api.review.v1.AppealReviewReply\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/review/appeal\x12v\n" +
-	"\vAuditReview\x12!.api.review.v1.AuditReviewRequest\x1a\x1f.api.review.v1.AuditReviewReply\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/operator/v1/reply/audit\x12w\n" +
-	"\vAuditAppeal\x12!.api.review.v1.AuditAppealRequest\x1a\x1f.api.review.v1.AuditAppealReply\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/operator/v1/appeal/audit\x12k\n" +
+	"ListReview\x12 .api.review.v1.ListReviewRequest\x1a\x1e.api.review.v1.ListReviewReply\"\x00\x12S\n" +
+	"\vReplyReview\x12!.api.review.v1.ReplyReviewRequest\x1a\x1f.api.review.v1.ReplyReviewReply\"\x00\x12V\n" +
+	"\fAppealReview\x12\".api.review.v1.AppealReviewRequest\x1a .api.review.v1.AppealReviewReply\"\x00\x12S\n" +
+	"\vAuditReview\x12!.api.review.v1.AuditReviewRequest\x1a\x1f.api.review.v1.AuditReviewReply\"\x00\x12S\n" +
+	"\vAuditAppeal\x12!.api.review.v1.AuditAppealRequest\x1a\x1f.api.review.v1.AuditAppealReply\"\x00\x12k\n" +
 	"\x13ListReviewByStoreID\x12).api.review.v1.ListReviewByStoreIDRequest\x1a'.api.review.v1.ListReviewByStoreIDReply\"\x00\x12h\n" +
 	"\x12ListReviewByUserID\x12(.api.review.v1.ListReviewByUserIDRequest\x1a&.api.review.v1.ListReviewByUserIDReply\"\x00B2\n" +
 	"\rapi.review.v1P\x01Z\x1freview-service/api/review/v1;v1b\x06proto3"
