@@ -11,59 +11,17 @@ option java_package = "api.review.v1";
 
 service Review {
   // C端
-  rpc CreateReview (CreateReviewRequest) returns (CreateReviewReply){
-    option (google.api.http) = {
-      post: "/v1/review",
-      body: "*"
-    };
-  };
-  rpc UpdateReview (UpdateReviewRequest) returns (UpdateReviewReply){
-    option (google.api.http) = {
-      patch: "/v1/review",
-      body: "*"
-    };
-  };
-  rpc DeleteReview (DeleteReviewRequest) returns (DeleteReviewReply){
-    option (google.api.http) = {
-      delete: "/v1/review/{reviewID}",
-    };
-  };
-  rpc GetReview (GetReviewRequest) returns (GetReviewReply){
-    option (google.api.http) = {
-      get: "/v1/review/{reviewID}",
-    };
-  };
-  rpc ListReview (ListReviewRequest) returns (ListReviewReply){
-    option (google.api.http) = {
-      get: "/v1/reviews",
-    };
-  };
+  rpc CreateReview (CreateReviewRequest) returns (CreateReviewReply){};
+  rpc UpdateReview (UpdateReviewRequest) returns (UpdateReviewReply){};
+  rpc DeleteReview (DeleteReviewRequest) returns (DeleteReviewReply){};
+  rpc GetReview (GetReviewRequest) returns (GetReviewReply){};
+  rpc ListReview (ListReviewRequest) returns (ListReviewReply){};
   // B端
-  rpc ReplyReview (ReplyReviewRequest) returns (ReplyReviewReply){
-    option (google.api.http) = {
-      post: "/v1/review/reply",
-      body: "*"
-    };
-  };
-  rpc AppealReview(AppealReviewRequest) returns (AppealReviewReply){
-    option (google.api.http) = {
-      post: "/v1/review/appeal",
-      body: "*"
-    };
-  }
+  rpc ReplyReview (ReplyReviewRequest) returns (ReplyReviewReply){};
+  rpc AppealReview(AppealReviewRequest) returns (AppealReviewReply){}
   // O端
-  rpc AuditReview(AuditReviewRequest) returns(AuditReviewReply){
-    option (google.api.http) = {
-      post: "/operator/v1/reply/audit",
-      body: "*",
-    };
-  };
-  rpc AuditAppeal(AuditAppealRequest) returns(AuditAppealReply){
-    option (google.api.http) = {
-      post: "/operator/v1/appeal/audit",
-      body: "*",
-    };
-  };
+  rpc AuditReview(AuditReviewRequest) returns(AuditReviewReply){};
+  rpc AuditAppeal(AuditAppealRequest) returns(AuditAppealReply){};
   rpc ListReviewByStoreID (ListReviewByStoreIDRequest) returns (ListReviewByStoreIDReply){};
   rpc ListReviewByUserID (ListReviewByUserIDRequest) returns (ListReviewByUserIDReply){};
 }
