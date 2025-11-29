@@ -38,7 +38,6 @@ service Review {
       get: "/v1/reviews",
     };
   };
-  rpc ListReviewByStoreID (ListReviewByStoreIDRequest) returns (ListReviewByStoreIDReply){};
   // B端
   rpc ReplyReview (ReplyReviewRequest) returns (ReplyReviewReply){
     option (google.api.http) = {
@@ -65,6 +64,8 @@ service Review {
       body: "*",
     };
   };
+  rpc ListReviewByStoreID (ListReviewByStoreIDRequest) returns (ListReviewByStoreIDReply){};
+  rpc ListReviewByUserID (ListReviewByUserIDRequest) returns (ListReviewByUserIDReply){};
 }
 
 // 客户端
@@ -85,16 +86,13 @@ message CreateReviewReply {
 }
 message UpdateReviewRequest {
   int64 reviewID = 1 [(validate.rules).int64 = {gt: 0}];
-  int64 userID = 2 [(validate.rules).int64 = {gt: 0}];
-  int64 orderID = 3 [(validate.rules).int64 = {gt: 0}];
-  int32 score = 4 [(validate.rules).int32 = {in: [1, 2, 3, 4, 5]}];
-  int32  serviceScore = 5 [(validate.rules).int32 = {in: [1, 2, 3, 4, 5]}];
-  int32  expressScore = 6 [(validate.rules).int32 = {in: [1, 2, 3, 4, 5]}]; // 物流分数
-  string content = 7 [(validate.rules).string = {min_len: 5, max_len: 255}];
-  string picInfo = 8;
-  string videoInfo = 9;
-  bool anonymous = 10;
-  int64 storeID = 11;
+  int32 score = 2 [(validate.rules).int32 = {in: [1, 2, 3, 4, 5]}];
+  int32  serviceScore = 3 [(validate.rules).int32 = {in: [1, 2, 3, 4, 5]}];
+  int32  expressScore = 4 [(validate.rules).int32 = {in: [1, 2, 3, 4, 5]}]; // 物流分数
+  string content = 5 [(validate.rules).string = {min_len: 5, max_len: 255}];
+  string picInfo = 6;
+  string videoInfo = 7;
+  bool anonymous = 8;
 }
 message UpdateReviewReply {
   int64 reviewID = 1;
@@ -138,14 +136,7 @@ message ListReviewRequest {}
 message ListReviewReply {
   repeated ReviewInfo reviews = 1;
 }
-message ListReviewByStoreIDRequest{
-  int64 storeID = 1 [(validate.rules).int64 = {gt: 0}];
-  int32 page = 2 [(validate.rules).int32 = {gt: 0}];
-  int32 size = 3 [(validate.rules).int32 = {gt: 0}];
-}
-message ListReviewByStoreIDReply{
-  repeated ReviewInfo list = 1;
-}
+
 // 商家端
 message ReplyReviewRequest {
   int64 reviewID = 1 [(validate.rules).int64 = {gt: 0}];
@@ -188,4 +179,22 @@ message AuditAppealRequest {
 }
 message AuditAppealReply {
   int64 appealID = 1;
+}
+
+message ListReviewByStoreIDRequest{
+  int64 storeID = 1 [(validate.rules).int64 = {gt: 0}];
+  int32 page = 2 [(validate.rules).int32 = {gt: 0}];
+  int32 size = 3 [(validate.rules).int32 = {gt: 0}];
+}
+message ListReviewByStoreIDReply{
+  repeated ReviewInfo list = 1;
+}
+
+message ListReviewByUserIDRequest{
+  int64 userID = 1 [(validate.rules).int64 = {gt: 0}];
+  int32 page = 2 [(validate.rules).int32 = {gt: 0}];
+  int32 size = 3 [(validate.rules).int32 = {gt: 0}];
+}
+message ListReviewByUserIDReply{
+  repeated ReviewInfo list = 1;
 }
