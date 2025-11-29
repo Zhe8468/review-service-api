@@ -269,6 +269,17 @@ func (m *ReplyInfo) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if m.GetReplyID() <= 0 {
+		err := ReplyInfoValidationError{
+			field:  "ReplyID",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if m.GetStoreID() <= 0 {
 		err := ReplyInfoValidationError{
 			field:  "StoreID",
@@ -397,6 +408,17 @@ func (m *AppealInfo) validate(all bool) error {
 	if m.GetReviewID() <= 0 {
 		err := AppealInfoValidationError{
 			field:  "ReviewID",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAppealID() <= 0 {
+		err := AppealInfoValidationError{
+			field:  "AppealID",
 			reason: "value must be greater than 0",
 		}
 		if !all {

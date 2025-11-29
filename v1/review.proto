@@ -14,7 +14,6 @@ service Review {
   rpc UpdateReview (UpdateReviewRequest) returns (UpdateReviewReply){};
   rpc DeleteReview (DeleteReviewRequest) returns (DeleteReviewReply){};
   rpc GetReview (GetReviewRequest) returns (GetReviewReply){};
-  rpc ListReview (ListReviewRequest) returns (ListReviewReply){};
   // B端
   rpc ReplyReview (ReplyReviewRequest) returns (ReplyReviewReply){};
   rpc AppealReview(AppealReviewRequest) returns (AppealReviewReply){}
@@ -25,6 +24,7 @@ service Review {
   rpc ListReviewByUserID (ListReviewByUserIDRequest) returns (ListReviewByUserIDReply){};
   rpc ListReply(ListReplyRequest) returns (ListReplyReply);
   rpc ListAppeal(ListAppealRequest) returns (ListAppealReply);
+  rpc ListReview (ListReviewRequest) returns (ListReviewReply){};
 }
 // 通用消息结构体
 message ReviewInfo{
@@ -110,10 +110,7 @@ message GetReviewReply {
   int64 storeID = 11;
   int64 status = 12;
 }
-message ListReviewRequest {}
-message ListReviewReply {
-  repeated ReviewInfo reviews = 1;
-}
+
 // 商家端
 message ReplyReviewRequest {
   int64 reviewID = 1 [(validate.rules).int64 = {gt: 0}];
@@ -183,4 +180,8 @@ message ListAppealRequest{
 }
 message ListAppealReply{
   repeated AppealInfo list = 1;
+}
+message ListReviewRequest {}
+message ListReviewReply {
+  repeated ReviewInfo reviews = 1;
 }

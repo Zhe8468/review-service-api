@@ -158,10 +158,11 @@ func (x *ReviewInfo) GetStatus() int64 {
 type ReplyInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ReviewID      int64                  `protobuf:"varint,1,opt,name=reviewID,proto3" json:"reviewID,omitempty"`
-	StoreID       int64                  `protobuf:"varint,2,opt,name=storeID,proto3" json:"storeID,omitempty"`
-	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
-	PicInfo       string                 `protobuf:"bytes,4,opt,name=picInfo,proto3" json:"picInfo,omitempty"`
-	VideoInfo     string                 `protobuf:"bytes,5,opt,name=videoInfo,proto3" json:"videoInfo,omitempty"`
+	ReplyID       int64                  `protobuf:"varint,2,opt,name=replyID,proto3" json:"replyID,omitempty"`
+	StoreID       int64                  `protobuf:"varint,3,opt,name=storeID,proto3" json:"storeID,omitempty"`
+	Content       string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	PicInfo       string                 `protobuf:"bytes,5,opt,name=picInfo,proto3" json:"picInfo,omitempty"`
+	VideoInfo     string                 `protobuf:"bytes,6,opt,name=videoInfo,proto3" json:"videoInfo,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -203,6 +204,13 @@ func (x *ReplyInfo) GetReviewID() int64 {
 	return 0
 }
 
+func (x *ReplyInfo) GetReplyID() int64 {
+	if x != nil {
+		return x.ReplyID
+	}
+	return 0
+}
+
 func (x *ReplyInfo) GetStoreID() int64 {
 	if x != nil {
 		return x.StoreID
@@ -234,11 +242,12 @@ func (x *ReplyInfo) GetVideoInfo() string {
 type AppealInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ReviewID      int64                  `protobuf:"varint,1,opt,name=reviewID,proto3" json:"reviewID,omitempty"`
-	StoreID       int64                  `protobuf:"varint,2,opt,name=storeID,proto3" json:"storeID,omitempty"`
-	Reason        string                 `protobuf:"bytes,3,opt,name=reason,proto3" json:"reason,omitempty"`
-	Content       string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
-	PicInfo       string                 `protobuf:"bytes,5,opt,name=picInfo,proto3" json:"picInfo,omitempty"`
-	VideoInfo     string                 `protobuf:"bytes,6,opt,name=videoInfo,proto3" json:"videoInfo,omitempty"`
+	AppealID      int64                  `protobuf:"varint,2,opt,name=appealID,proto3" json:"appealID,omitempty"`
+	StoreID       int64                  `protobuf:"varint,3,opt,name=storeID,proto3" json:"storeID,omitempty"`
+	Reason        string                 `protobuf:"bytes,4,opt,name=reason,proto3" json:"reason,omitempty"`
+	Content       string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
+	PicInfo       string                 `protobuf:"bytes,6,opt,name=picInfo,proto3" json:"picInfo,omitempty"`
+	VideoInfo     string                 `protobuf:"bytes,7,opt,name=videoInfo,proto3" json:"videoInfo,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -276,6 +285,13 @@ func (*AppealInfo) Descriptor() ([]byte, []int) {
 func (x *AppealInfo) GetReviewID() int64 {
 	if x != nil {
 		return x.ReviewID
+	}
+	return 0
+}
+
+func (x *AppealInfo) GetAppealID() int64 {
+	if x != nil {
+		return x.AppealID
 	}
 	return 0
 }
@@ -1837,24 +1853,26 @@ const file_review_v1_review_proto_rawDesc = "" +
 	"\tanonymous\x18\n" +
 	" \x01(\bR\tanonymous\x12\x18\n" +
 	"\astoreID\x18\v \x01(\x03R\astoreID\x12\x16\n" +
-	"\x06status\x18\f \x01(\x03R\x06status\"\xb1\x01\n" +
+	"\x06status\x18\f \x01(\x03R\x06status\"\xd4\x01\n" +
 	"\tReplyInfo\x12#\n" +
 	"\breviewID\x18\x01 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\breviewID\x12!\n" +
-	"\astoreID\x18\x02 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\astoreID\x12$\n" +
-	"\acontent\x18\x03 \x01(\tB\n" +
-	"\xfaB\ar\x05\x10\x05\x18\xff\x01R\acontent\x12\x18\n" +
-	"\apicInfo\x18\x04 \x01(\tR\apicInfo\x12\x1c\n" +
-	"\tvideoInfo\x18\x05 \x01(\tR\tvideoInfo\"\xd6\x01\n" +
-	"\n" +
-	"AppealInfo\x12#\n" +
-	"\breviewID\x18\x01 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\breviewID\x12!\n" +
-	"\astoreID\x18\x02 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\astoreID\x12\"\n" +
-	"\x06reason\x18\x03 \x01(\tB\n" +
-	"\xfaB\ar\x05\x10\x05\x18\xff\x01R\x06reason\x12$\n" +
+	"\areplyID\x18\x02 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\areplyID\x12!\n" +
+	"\astoreID\x18\x03 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\astoreID\x12$\n" +
 	"\acontent\x18\x04 \x01(\tB\n" +
 	"\xfaB\ar\x05\x10\x05\x18\xff\x01R\acontent\x12\x18\n" +
 	"\apicInfo\x18\x05 \x01(\tR\apicInfo\x12\x1c\n" +
-	"\tvideoInfo\x18\x06 \x01(\tR\tvideoInfo\"\x80\x03\n" +
+	"\tvideoInfo\x18\x06 \x01(\tR\tvideoInfo\"\xfb\x01\n" +
+	"\n" +
+	"AppealInfo\x12#\n" +
+	"\breviewID\x18\x01 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\breviewID\x12#\n" +
+	"\bappealID\x18\x02 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\bappealID\x12!\n" +
+	"\astoreID\x18\x03 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\astoreID\x12\"\n" +
+	"\x06reason\x18\x04 \x01(\tB\n" +
+	"\xfaB\ar\x05\x10\x05\x18\xff\x01R\x06reason\x12$\n" +
+	"\acontent\x18\x05 \x01(\tB\n" +
+	"\xfaB\ar\x05\x10\x05\x18\xff\x01R\acontent\x12\x18\n" +
+	"\apicInfo\x18\x06 \x01(\tR\apicInfo\x12\x1c\n" +
+	"\tvideoInfo\x18\a \x01(\tR\tvideoInfo\"\x80\x03\n" +
 	"\x13CreateReviewRequest\x12\x1f\n" +
 	"\x06userID\x18\x01 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\x06userID\x12!\n" +
 	"\aorderID\x18\x02 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\aorderID\x12%\n" +
