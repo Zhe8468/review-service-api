@@ -174,11 +174,11 @@ message ListReplyRequest {
 
 }
 message ListReplyReply {
-
+  repeated ReplyInfo list = 1;
 }
 message ListAppealRequest{
 
 }
 message ListAppealReply{
-
+  repeated AppealInfo list = 1;
 }

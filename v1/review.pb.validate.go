@@ -35,6 +35,490 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on ReviewInfo with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ReviewInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReviewInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ReviewInfoMultiError, or
+// nil if none found.
+func (m *ReviewInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReviewInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ReviewID
+
+	if m.GetUserID() <= 0 {
+		err := ReviewInfoValidationError{
+			field:  "UserID",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetOrderID() <= 0 {
+		err := ReviewInfoValidationError{
+			field:  "OrderID",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if _, ok := _ReviewInfo_Score_InLookup[m.GetScore()]; !ok {
+		err := ReviewInfoValidationError{
+			field:  "Score",
+			reason: "value must be in list [1 2 3 4 5]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if _, ok := _ReviewInfo_ServiceScore_InLookup[m.GetServiceScore()]; !ok {
+		err := ReviewInfoValidationError{
+			field:  "ServiceScore",
+			reason: "value must be in list [1 2 3 4 5]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if _, ok := _ReviewInfo_ExpressScore_InLookup[m.GetExpressScore()]; !ok {
+		err := ReviewInfoValidationError{
+			field:  "ExpressScore",
+			reason: "value must be in list [1 2 3 4 5]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if l := utf8.RuneCountInString(m.GetContent()); l < 5 || l > 255 {
+		err := ReviewInfoValidationError{
+			field:  "Content",
+			reason: "value length must be between 5 and 255 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for PicInfo
+
+	// no validation rules for VideoInfo
+
+	// no validation rules for Anonymous
+
+	// no validation rules for StoreID
+
+	// no validation rules for Status
+
+	if len(errors) > 0 {
+		return ReviewInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReviewInfoMultiError is an error wrapping multiple validation errors
+// returned by ReviewInfo.ValidateAll() if the designated constraints aren't met.
+type ReviewInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReviewInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReviewInfoMultiError) AllErrors() []error { return m }
+
+// ReviewInfoValidationError is the validation error returned by
+// ReviewInfo.Validate if the designated constraints aren't met.
+type ReviewInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReviewInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReviewInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReviewInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReviewInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReviewInfoValidationError) ErrorName() string { return "ReviewInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ReviewInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReviewInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReviewInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReviewInfoValidationError{}
+
+var _ReviewInfo_Score_InLookup = map[int32]struct{}{
+	1: {},
+	2: {},
+	3: {},
+	4: {},
+	5: {},
+}
+
+var _ReviewInfo_ServiceScore_InLookup = map[int32]struct{}{
+	1: {},
+	2: {},
+	3: {},
+	4: {},
+	5: {},
+}
+
+var _ReviewInfo_ExpressScore_InLookup = map[int32]struct{}{
+	1: {},
+	2: {},
+	3: {},
+	4: {},
+	5: {},
+}
+
+// Validate checks the field values on ReplyInfo with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ReplyInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReplyInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ReplyInfoMultiError, or nil
+// if none found.
+func (m *ReplyInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReplyInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetReviewID() <= 0 {
+		err := ReplyInfoValidationError{
+			field:  "ReviewID",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetStoreID() <= 0 {
+		err := ReplyInfoValidationError{
+			field:  "StoreID",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if l := utf8.RuneCountInString(m.GetContent()); l < 5 || l > 255 {
+		err := ReplyInfoValidationError{
+			field:  "Content",
+			reason: "value length must be between 5 and 255 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for PicInfo
+
+	// no validation rules for VideoInfo
+
+	if len(errors) > 0 {
+		return ReplyInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReplyInfoMultiError is an error wrapping multiple validation errors returned
+// by ReplyInfo.ValidateAll() if the designated constraints aren't met.
+type ReplyInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReplyInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReplyInfoMultiError) AllErrors() []error { return m }
+
+// ReplyInfoValidationError is the validation error returned by
+// ReplyInfo.Validate if the designated constraints aren't met.
+type ReplyInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReplyInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReplyInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReplyInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReplyInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReplyInfoValidationError) ErrorName() string { return "ReplyInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ReplyInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReplyInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReplyInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReplyInfoValidationError{}
+
+// Validate checks the field values on AppealInfo with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *AppealInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AppealInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in AppealInfoMultiError, or
+// nil if none found.
+func (m *AppealInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AppealInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetReviewID() <= 0 {
+		err := AppealInfoValidationError{
+			field:  "ReviewID",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetStoreID() <= 0 {
+		err := AppealInfoValidationError{
+			field:  "StoreID",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if l := utf8.RuneCountInString(m.GetReason()); l < 5 || l > 255 {
+		err := AppealInfoValidationError{
+			field:  "Reason",
+			reason: "value length must be between 5 and 255 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if l := utf8.RuneCountInString(m.GetContent()); l < 5 || l > 255 {
+		err := AppealInfoValidationError{
+			field:  "Content",
+			reason: "value length must be between 5 and 255 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for PicInfo
+
+	// no validation rules for VideoInfo
+
+	if len(errors) > 0 {
+		return AppealInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// AppealInfoMultiError is an error wrapping multiple validation errors
+// returned by AppealInfo.ValidateAll() if the designated constraints aren't met.
+type AppealInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AppealInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AppealInfoMultiError) AllErrors() []error { return m }
+
+// AppealInfoValidationError is the validation error returned by
+// AppealInfo.Validate if the designated constraints aren't met.
+type AppealInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AppealInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AppealInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AppealInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AppealInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AppealInfoValidationError) ErrorName() string { return "AppealInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AppealInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAppealInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AppealInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AppealInfoValidationError{}
+
 // Validate checks the field values on CreateReviewRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -1135,207 +1619,6 @@ var _GetReviewReply_ServiceScore_InLookup = map[int32]struct{}{
 }
 
 var _GetReviewReply_ExpressScore_InLookup = map[int32]struct{}{
-	1: {},
-	2: {},
-	3: {},
-	4: {},
-	5: {},
-}
-
-// Validate checks the field values on ReviewInfo with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *ReviewInfo) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ReviewInfo with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in ReviewInfoMultiError, or
-// nil if none found.
-func (m *ReviewInfo) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ReviewInfo) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for ReviewID
-
-	if m.GetUserID() <= 0 {
-		err := ReviewInfoValidationError{
-			field:  "UserID",
-			reason: "value must be greater than 0",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if m.GetOrderID() <= 0 {
-		err := ReviewInfoValidationError{
-			field:  "OrderID",
-			reason: "value must be greater than 0",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if _, ok := _ReviewInfo_Score_InLookup[m.GetScore()]; !ok {
-		err := ReviewInfoValidationError{
-			field:  "Score",
-			reason: "value must be in list [1 2 3 4 5]",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if _, ok := _ReviewInfo_ServiceScore_InLookup[m.GetServiceScore()]; !ok {
-		err := ReviewInfoValidationError{
-			field:  "ServiceScore",
-			reason: "value must be in list [1 2 3 4 5]",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if _, ok := _ReviewInfo_ExpressScore_InLookup[m.GetExpressScore()]; !ok {
-		err := ReviewInfoValidationError{
-			field:  "ExpressScore",
-			reason: "value must be in list [1 2 3 4 5]",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if l := utf8.RuneCountInString(m.GetContent()); l < 5 || l > 255 {
-		err := ReviewInfoValidationError{
-			field:  "Content",
-			reason: "value length must be between 5 and 255 runes, inclusive",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	// no validation rules for PicInfo
-
-	// no validation rules for VideoInfo
-
-	// no validation rules for Anonymous
-
-	// no validation rules for StoreID
-
-	// no validation rules for Status
-
-	if len(errors) > 0 {
-		return ReviewInfoMultiError(errors)
-	}
-
-	return nil
-}
-
-// ReviewInfoMultiError is an error wrapping multiple validation errors
-// returned by ReviewInfo.ValidateAll() if the designated constraints aren't met.
-type ReviewInfoMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ReviewInfoMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ReviewInfoMultiError) AllErrors() []error { return m }
-
-// ReviewInfoValidationError is the validation error returned by
-// ReviewInfo.Validate if the designated constraints aren't met.
-type ReviewInfoValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ReviewInfoValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ReviewInfoValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ReviewInfoValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ReviewInfoValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ReviewInfoValidationError) ErrorName() string { return "ReviewInfoValidationError" }
-
-// Error satisfies the builtin error interface
-func (e ReviewInfoValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sReviewInfo.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ReviewInfoValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ReviewInfoValidationError{}
-
-var _ReviewInfo_Score_InLookup = map[int32]struct{}{
-	1: {},
-	2: {},
-	3: {},
-	4: {},
-	5: {},
-}
-
-var _ReviewInfo_ServiceScore_InLookup = map[int32]struct{}{
-	1: {},
-	2: {},
-	3: {},
-	4: {},
-	5: {},
-}
-
-var _ReviewInfo_ExpressScore_InLookup = map[int32]struct{}{
 	1: {},
 	2: {},
 	3: {},
@@ -3096,3 +3379,473 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListReviewByUserIDReplyValidationError{}
+
+// Validate checks the field values on ListReplyRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListReplyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListReplyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListReplyRequestMultiError, or nil if none found.
+func (m *ListReplyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListReplyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListReplyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListReplyRequestMultiError is an error wrapping multiple validation errors
+// returned by ListReplyRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ListReplyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListReplyRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListReplyRequestMultiError) AllErrors() []error { return m }
+
+// ListReplyRequestValidationError is the validation error returned by
+// ListReplyRequest.Validate if the designated constraints aren't met.
+type ListReplyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListReplyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListReplyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListReplyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListReplyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListReplyRequestValidationError) ErrorName() string { return "ListReplyRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ListReplyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListReplyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListReplyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListReplyRequestValidationError{}
+
+// Validate checks the field values on ListReplyReply with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ListReplyReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListReplyReply with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ListReplyReplyMultiError,
+// or nil if none found.
+func (m *ListReplyReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListReplyReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetList() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListReplyReplyValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListReplyReplyValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListReplyReplyValidationError{
+					field:  fmt.Sprintf("List[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListReplyReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListReplyReplyMultiError is an error wrapping multiple validation errors
+// returned by ListReplyReply.ValidateAll() if the designated constraints
+// aren't met.
+type ListReplyReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListReplyReplyMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListReplyReplyMultiError) AllErrors() []error { return m }
+
+// ListReplyReplyValidationError is the validation error returned by
+// ListReplyReply.Validate if the designated constraints aren't met.
+type ListReplyReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListReplyReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListReplyReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListReplyReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListReplyReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListReplyReplyValidationError) ErrorName() string { return "ListReplyReplyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ListReplyReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListReplyReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListReplyReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListReplyReplyValidationError{}
+
+// Validate checks the field values on ListAppealRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListAppealRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListAppealRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListAppealRequestMultiError, or nil if none found.
+func (m *ListAppealRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListAppealRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListAppealRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListAppealRequestMultiError is an error wrapping multiple validation errors
+// returned by ListAppealRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ListAppealRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListAppealRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListAppealRequestMultiError) AllErrors() []error { return m }
+
+// ListAppealRequestValidationError is the validation error returned by
+// ListAppealRequest.Validate if the designated constraints aren't met.
+type ListAppealRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListAppealRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListAppealRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListAppealRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListAppealRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListAppealRequestValidationError) ErrorName() string {
+	return "ListAppealRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListAppealRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListAppealRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListAppealRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListAppealRequestValidationError{}
+
+// Validate checks the field values on ListAppealReply with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListAppealReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListAppealReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListAppealReplyMultiError, or nil if none found.
+func (m *ListAppealReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListAppealReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetList() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListAppealReplyValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListAppealReplyValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListAppealReplyValidationError{
+					field:  fmt.Sprintf("List[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListAppealReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListAppealReplyMultiError is an error wrapping multiple validation errors
+// returned by ListAppealReply.ValidateAll() if the designated constraints
+// aren't met.
+type ListAppealReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListAppealReplyMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListAppealReplyMultiError) AllErrors() []error { return m }
+
+// ListAppealReplyValidationError is the validation error returned by
+// ListAppealReply.Validate if the designated constraints aren't met.
+type ListAppealReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListAppealReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListAppealReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListAppealReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListAppealReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListAppealReplyValidationError) ErrorName() string { return "ListAppealReplyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ListAppealReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListAppealReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListAppealReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListAppealReplyValidationError{}
